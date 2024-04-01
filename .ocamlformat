@@ -1,0 +1,8 @@
+# profile = ocamlformat
+profile = janestreet
+# profile = conventional
+# extension-indent = 4
+# function-indent = 4
+# let-binding-indent = 4
+# type-decl-indent = 4
+sequence-blank-line = preserve-one

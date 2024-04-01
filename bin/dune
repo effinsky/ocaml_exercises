@@ -1,0 +1,6 @@
+(executable
+ (public_name o1)
+ (name main)
+ (libraries o1 stdio base sqlite3)
+ (modules main exercises)) ; register modules here
+
