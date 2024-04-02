@@ -55,6 +55,9 @@ let () =
       ]
   in
   print_endline "printing decoded list: ";
-  print_int (List.length decoded);
-  printer (fun it -> Printf.printf "%s" it) decoded
+  printer (fun it -> Printf.printf "%s" it) decoded;
+
+  let duplicated_items = Ex.duplicate_items [ 0; 5; 7; 2; -1; 43 ] in
+  print_endline "printing duplicated items: ";
+  printer (fun it -> Printf.printf "%d " it) duplicated_items
 ;;

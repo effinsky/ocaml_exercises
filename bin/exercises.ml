@@ -99,3 +99,11 @@ let run_len_decode (lst : 'a rle_item list) : 'a list =
 
   aux [] lst
 ;;
+
+let duplicate_items l =
+  let rec aux acc = function
+    | [] -> acc
+    | h :: t -> aux (h :: h :: acc) t
+  in
+  aux [] l |> List.rev
+;;
