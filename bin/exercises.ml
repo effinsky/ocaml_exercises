@@ -69,14 +69,14 @@ type 'a rle_item =
   | Plural of int * 'a
 
 let rle_modded lst =
-  let create_tuple count it = if count = 1 then Single it else Plural (count, it) in
+  let mk_tuple count it = if count = 1 then Single it else Plural (count, it) in
 
   (* just a reminder: function gets an implicit last arg from the surrounding scope *)
   let rec aux count acc = function
     | [] -> []
-    | [ x ] -> create_tuple (count + 1) x :: acc
+    | [ x ] -> mk_tuple (count + 1) x :: acc
     | a :: (b :: _ as t) ->
-      if a = b then aux (count + 1) acc t else aux 0 (create_tuple (count + 1) a :: acc) t
+      if a = b then aux (count + 1) acc t else aux 0 (mk_tuple (count + 1) a :: acc) t
   in
 
   List.rev (aux 0 [] lst)
@@ -106,4 +106,15 @@ let duplicate_items l =
     | h :: t -> aux (h :: h :: acc) t
   in
   aux [] l |> List.rev
+;;
+
+let replicate_items l count =
+  let create_partial count it = List.init count (fun _ -> it) in
+
+  let rec aux acc = function
+    | [] -> acc
+    | h :: t -> aux (acc @ create_partial count h) t
+  in
+
+  aux [] l
 ;;

@@ -59,5 +59,9 @@ let () =
 
   let duplicated_items = Ex.duplicate_items [ 0; 5; 7; 2; -1; 43 ] in
   print_endline "printing duplicated items: ";
-  printer (fun it -> Printf.printf "%d " it) duplicated_items
+  printer (fun it -> Printf.printf "%d " it) duplicated_items;
+
+  let replicated_items = Ex.replicate_items [ 666; 777; 888 ] 4 in
+  print_endline "printing replicated items: ";
+  printer (fun it -> Printf.printf "%d " it) replicated_items
 ;;

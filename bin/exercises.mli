@@ -18,4 +18,4 @@ type 'a rle_item =
 val rle_modded : 'a list -> 'a rle_item list
 val run_len_decode : 'a rle_item list -> 'a list
 val duplicate_items : 'a list -> 'a list
-
+val replicate_items : 'a list -> int -> 'a list
