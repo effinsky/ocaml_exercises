@@ -118,3 +118,23 @@ let replicate_items l count =
 
   aux [] l
 ;;
+
+let remove_nth (l : 'a list) (n : int) =
+  let rec aux (c : int) (acc : 'a list) (l : 'a list) =
+    List.length l |> Printf.printf "inp list len: %d\n";
+
+    match l with
+    | [] -> acc
+    | h :: t ->
+      if c = 1
+      then (* return acc without the head *)
+        aux n t acc
+      else (* include the head element *)
+        aux (c - 1) t (h :: acc)
+  in
+
+  aux n [] l
+;;
+
+(* Split a list into two parts; the length of the first part is given. *)
+let split_list_at (_lst : 'a list) (_at : int) : 'a list * 'a list = [], []
