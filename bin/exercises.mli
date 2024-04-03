@@ -19,5 +19,10 @@ val rle_modded : 'a list -> 'a rle_item list
 val run_len_decode : 'a rle_item list -> 'a list
 val duplicate_items : 'a list -> 'a list
 val replicate_items : 'a list -> int -> 'a list
-val remove_nth : int list -> int -> int list
+val remove_nth : 'a list -> int -> 'a list
 val split_list_at : 'a list -> int -> 'a list * 'a list
+
+module Fact : sig
+  val exec : int -> int
+end
+
