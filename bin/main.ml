@@ -3,6 +3,7 @@ module StringMap = Map.Make (String)
 
 let printer (f : 'a -> unit) (lst : 'a list) =
   List.iter f lst ; print_endline ""
+;;
 
 let pr_int it = Printf.printf "%d " it
 
@@ -92,3 +93,4 @@ let () =
   let nth_to_remove = ["someting"; "nothing"; "everything"; "anything"] in
   let with_2nd_removed = Ex.remove_nth nth_to_remove 2 in
   printer pr_str with_2nd_removed
+;;

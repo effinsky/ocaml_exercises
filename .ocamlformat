@@ -6,3 +6,4 @@ profile = ocamlformat
 # let-binding-indent = 4
 # type-decl-indent = 4
 sequence-blank-line = preserve-one
+let-binding-spacing = double-semicolon

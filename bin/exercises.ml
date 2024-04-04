@@ -18,6 +18,7 @@ let flatten (lst : 'a list_node list) : 'a list =
   in
 
   aux lst [] |> List.rev
+;;
 
 let rec compress (l : 'a list) : 'a list =
   match l with
@@ -27,6 +28,7 @@ let rec compress (l : 'a list) : 'a list =
       if a = b then compress t else a :: compress t
   | smaller ->
       smaller
+;;
 
 let pack (lst : 'a list) : 'a list list =
   let rec aux (acc : 'a list list) (curr : 'a list) (remaining : 'a list) :
@@ -44,6 +46,7 @@ let pack (lst : 'a list) : 'a list list =
           aux (curr :: acc) [x] xs )
   in
   aux [] [] lst
+;;
 
 let encode (lst : 'a list) : (int * 'a) list =
   let rec aux count acc = function
@@ -56,6 +59,7 @@ let encode (lst : 'a list) : (int * 'a) list =
   in
 
   List.rev (aux 0 [] lst)
+;;
 
 let rec last_two lst =
   match lst with
@@ -65,6 +69,7 @@ let rec last_two lst =
       Some (x, y)
   | _ :: t ->
       last_two t
+;;
 
 let rec nth_element (idx : int) (lst : 'a list) : 'a option =
   match lst with
@@ -72,6 +77,7 @@ let rec nth_element (idx : int) (lst : 'a list) : 'a option =
       None
   | h :: t ->
       if idx = 0 then Some h else nth_element (idx - 1) t
+;;
 
 type 'a rle_item = Single of 'a | Plural of int * 'a
 
@@ -90,6 +96,7 @@ let rle_modded lst =
   in
 
   List.rev (aux 0 [] lst)
+;;
 
 (* rldecode*)
 let run_len_decode (lst : 'a rle_item list) : 'a list =
@@ -110,10 +117,12 @@ let run_len_decode (lst : 'a rle_item list) : 'a list =
   in
 
   aux [] lst
+;;
 
 let duplicate_items l =
   let rec aux acc = function [] -> acc | h :: t -> aux (h :: h :: acc) t in
   aux [] l |> List.rev
+;;
 
 let replicate_items l count =
   let create_partial count it = List.init count (fun _ -> it) in
@@ -126,6 +135,7 @@ let replicate_items l count =
   in
 
   aux [] l
+;;
 
 (* Split a list into two parts; the length of the first part is given. *)
 let split_list_at (lst : 'a list) (at : int) : 'a list * 'a list =
@@ -141,6 +151,7 @@ let split_list_at (lst : 'a list) (at : int) : 'a list * 'a list =
 
   let l1, l2 = aux 0 ([], []) lst in
   (List.rev l1, List.rev l2)
+;;
 
 module Slice_from_to_proper = struct
   (* I will contrain one of the type params to be a list of the other type param
@@ -151,6 +162,7 @@ module Slice_from_to_proper = struct
         (acc, [])
     | h :: t as l ->
         if n = 0 then (acc, l) else fold_until f (f acc h) (n - 1) t
+  ;;
 
   let slice lst i j =
     (* get list to take from by dropping elements / folding until*)
@@ -159,6 +171,7 @@ module Slice_from_to_proper = struct
       fold_until (fun acc h -> h :: acc) [] (j - i + 1) lst_sans_dropped
     in
     List.rev taken
+  ;;
 end
 
 let slice_from_to_naive l i1 i2 =
@@ -180,6 +193,7 @@ let slice_from_to_naive l i1 i2 =
   in
   (* much more readable left to right like that *)
   l |> drop (i1 - 1) |> take (i2 - i1 + 1)
+;;
 
 (* recurse over orig list while returning an accumnlator; skip of the the nth
    element*)
@@ -193,3 +207,4 @@ let remove_nth (l : 'a list) (n : int) : 'a list =
   in
 
   List.rev @@ aux [] 0 l
+;;
