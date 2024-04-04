@@ -127,22 +127,6 @@ let replicate_items l count =
 
   aux [] l
 
-let remove_nth (l : 'a list) (n : int) =
-  let rec aux (c : int) (acc : 'a list) (l : 'a list) =
-    List.length l |> Printf.printf "inp list len: %d\n" ;
-
-    match l with
-    | [] ->
-        acc
-    | h :: t ->
-        if c = 1 then (* return acc without the head *)
-          aux n t acc
-        else (* include the head element *)
-          aux (c - 1) t (h :: acc)
-  in
-
-  aux n [] l
-
 (* Split a list into two parts; the length of the first part is given. *)
 let split_list_at (lst : 'a list) (at : int) : 'a list * 'a list =
   let rec aux idx (acc : 'a list * 'a list) = function
@@ -196,3 +180,16 @@ let slice_from_to_naive l i1 i2 =
   in
   (* much more readable left to right like that *)
   l |> drop (i1 - 1) |> take (i2 - i1 + 1)
+
+(* recurse over orig list while returning an accumnlator; skip of the the nth
+   element*)
+let remove_nth (l : 'a list) (n : int) : 'a list =
+  let rec aux (acc : 'a list) (curr_idx : int) = function
+    | [] ->
+        acc
+    | h :: t ->
+        if curr_idx = n then aux acc (curr_idx + 1) t
+        else aux (h :: acc) (curr_idx + 1) t
+  in
+
+  List.rev @@ aux [] 0 l

@@ -24,13 +24,16 @@ val duplicate_items : 'a list -> 'a list
 
 val replicate_items : 'a list -> int -> 'a list
 
-val remove_nth : 'a list -> int -> 'a list
-
 val split_list_at : 'a list -> int -> 'a list * 'a list
 
 module Slice_from_to_proper : sig
+  val fold_until :
+    ('a list -> 'a -> 'a list) -> 'a list -> int -> 'a list -> 'a list * 'a list
+
   val slice : 'a list -> int -> int -> 'a list
 end
 
 val slice_from_to_naive : 'a list -> int -> int -> 'a list
+
+val remove_nth : 'a list -> int -> 'a list
 

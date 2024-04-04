@@ -87,4 +87,8 @@ let () =
   let list_to_slice = [8; 7; 6; 5; 4; 3; 2; 1; 0] in
   let sliced = Ex.Slice_from_to_proper.slice list_to_slice 3 5 in
   print_endline "printing sliced list" ;
-  printer pr_int sliced
+  printer pr_int sliced ;
+
+  let nth_to_remove = ["someting"; "nothing"; "everything"; "anything"] in
+  let with_2nd_removed = Ex.remove_nth nth_to_remove 2 in
+  printer pr_str with_2nd_removed
