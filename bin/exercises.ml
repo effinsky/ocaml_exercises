@@ -158,8 +158,41 @@ let split_list_at (lst : 'a list) (at : int) : 'a list * 'a list =
   let l1, l2 = aux 0 ([], []) lst in
   (List.rev l1, List.rev l2)
 
-module Fact = struct
-  let exec n =
-    let rec aux n res = if n = 0 then res else aux (n - 1) (res * n) in
-    aux n 1
+module Slice_from_to_proper = struct
+  (* I will contrain one of the type params to be a list of the other type param
+     type normally we could have the fold_until be more flexible in terms of type
+     of acc accepted, but it's scoped here to be an unexported helper *)
+  let rec fold_until (f : 'a list -> 'a -> 'a list) (acc : 'a list) n = function
+    | [] ->
+        (acc, [])
+    | h :: t as l ->
+        if n = 0 then (acc, l) else fold_until f (f acc h) (n - 1) t
+
+  let slice lst i j =
+    (* get list to take from by dropping elements / folding until*)
+    let _, lst_sans_dropped = fold_until (fun _ _ -> []) [] i lst in
+    let taken, _ =
+      fold_until (fun acc h -> h :: acc) [] (j - i + 1) lst_sans_dropped
+    in
+    List.rev taken
 end
+
+let slice_from_to_naive l i1 i2 =
+  (* drop n first elements *)
+  let rec drop n = function
+    | [] ->
+        []
+    | _ :: t ->
+        if n = 0 then t else drop (n - 1) t
+  in
+  (* grab n first items from the list with the first n items dropped *)
+  let rec take n = function
+    | [] ->
+        []
+    | h :: t ->
+        (* problem is it's not tail recursive and there's some duplication
+           of structure of the take helper, so this might blow the stack *)
+        if n = 0 then [] else h :: take (n - 1) t
+  in
+  (* much more readable left to right like that *)
+  l |> drop (i1 - 1) |> take (i2 - i1 + 1)

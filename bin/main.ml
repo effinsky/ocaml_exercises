@@ -79,9 +79,12 @@ let () =
   (* split list *)
   let list_to_split = [6; 3; 4; 6; 2; 2; 4; 4; 2] in
   let l_1, l_2 = Ex.split_list_at list_to_split 5 in
+  print_endline "printing split list" ;
   printer pr_int l_1 ;
   printer pr_int l_2 ;
 
-  let fact_10 = Ex.Fact.exec 10 in
-  print_string "printing fact 10: " ;
-  pr_int fact_10
+  (* slice from list *)
+  let list_to_slice = [8; 7; 6; 5; 4; 3; 2; 1; 0] in
+  let sliced = Ex.Slice_from_to_proper.slice list_to_slice 3 5 in
+  print_endline "printing sliced list" ;
+  printer pr_int sliced
