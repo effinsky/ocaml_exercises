@@ -208,3 +208,12 @@ let remove_nth (l : 'a list) (n : int) : 'a list =
 
   List.rev @@ aux [] 0 l
 ;;
+
+let rotate_left (lst : 'a list) (n : int) =
+  (* ensure n is within list bounds *)
+  let offset = n mod List.length lst in
+  (* reuse our split fun from above *)
+  let fst, snd = split_list_at lst offset in
+
+  snd @ fst
+;;

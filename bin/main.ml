@@ -61,36 +61,56 @@ let () =
       ; Ex.Single "d"
       ; Ex.Plural (4, "e") ]
   in
-  print_endline "printing decoded list: " ;
+  print_endline "decoded list: " ;
   printer pr_str decoded ;
 
   let duplicated_items = Ex.duplicate_items [0; 5; 7; 2; -1; 43] in
-  print_endline "printing duplicated items: " ;
+  print_endline "duplicated items: " ;
   printer pr_int duplicated_items ;
 
   let replicated_items = Ex.replicate_items [666; 777; 888] 4 in
-  print_endline "printing replicated items: " ;
+  print_endline "replicated items: " ;
   printer pr_int replicated_items ;
 
   let list_to_remove_nth_from = [1; 2; 3; 4; 5; 6; 7; 8; 9] in
   let removed_nth = Ex.remove_nth list_to_remove_nth_from 3 in
-  print_endline "printing list with nth items removed: " ;
+  print_endline "list with nth items removed: " ;
   printer pr_int removed_nth ;
+
+  print_endline "----------------------------------------------" ;
 
   (* split list *)
   let list_to_split = [6; 3; 4; 6; 2; 2; 4; 4; 2] in
+  print_endline "list_to_split" ;
+  printer pr_int list_to_split ;
   let l_1, l_2 = Ex.split_list_at list_to_split 5 in
-  print_endline "printing split list" ;
+  print_endline "split list" ;
   printer pr_int l_1 ;
   printer pr_int l_2 ;
+
+  print_endline "----------------------------------------------" ;
 
   (* slice from list *)
   let list_to_slice = [8; 7; 6; 5; 4; 3; 2; 1; 0] in
   let sliced = Ex.Slice_from_to_proper.slice list_to_slice 3 5 in
-  print_endline "printing sliced list" ;
+  print_endline "sliced list" ;
   printer pr_int sliced ;
 
-  let nth_to_remove = ["someting"; "nothing"; "everything"; "anything"] in
+  print_endline "----------------------------------------------" ;
+
+  (* remove nth element from list *)
+  let nth_to_remove = ["something"; "nothing"; "everything"; "anything"] in
   let with_2nd_removed = Ex.remove_nth nth_to_remove 2 in
-  printer pr_str with_2nd_removed
+  printer pr_str with_2nd_removed ;
+
+  print_endline "----------------------------------------------" ;
+
+  (* rotate list n positions to the left *)
+  let _l_to_rotate = [1; 2; 3; 4; 5; 6] in
+  let pos = 4 in
+  let _rotated_left = Ex.rotate_left _l_to_rotate pos in
+  Printf.printf "list to rotate by %d\n" pos ;
+  printer pr_int _l_to_rotate ;
+  print_endline "rotated list" ;
+  printer pr_int _rotated_left
 ;;
