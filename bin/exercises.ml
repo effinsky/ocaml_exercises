@@ -225,6 +225,7 @@ let insert_at item at lst =
       | [] ->
           List.rev acc
       | h :: t ->
+          (* item prepended first, then head*)
           if idx = at then aux idx (h :: item :: acc) t
           else aux (idx + 1) (h :: acc) t
     in
