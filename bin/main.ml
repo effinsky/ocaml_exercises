@@ -106,11 +106,22 @@ let () =
   print_endline "----------------------------------------------" ;
 
   (* rotate list n positions to the left *)
-  let _l_to_rotate = [1; 2; 3; 4; 5; 6] in
+  let l_to_rotate = [1; 2; 3; 4; 5; 6] in
   let pos = 4 in
-  let _rotated_left = Ex.rotate_left _l_to_rotate pos in
+  let rotated_left = Ex.rotate_left l_to_rotate pos in
   Printf.printf "list to rotate by %d\n" pos ;
-  printer pr_int _l_to_rotate ;
+  printer pr_int l_to_rotate ;
   print_endline "rotated list" ;
-  printer pr_int _rotated_left
+  printer pr_int rotated_left ;
+
+  (* insert an item at a given position into a list *)
+  let l_to_insert_to = ["alpha"; "beta"; "delta"] in
+  let pos = 2 in
+  let l_inserted = Ex.insert_at "gamma" pos l_to_insert_to in
+
+  print_endline "printing list before insertion" ;
+  printer pr_str l_to_insert_to ;
+  Printf.printf "printing list with element inserted at position %d\n" pos ;
+  (* will unwrap option for this case for brevity *)
+  l_inserted |> Option.get |> printer pr_str
 ;;

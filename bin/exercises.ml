@@ -217,3 +217,17 @@ let rotate_left (lst : 'a list) (n : int) =
 
   snd @ fst
 ;;
+
+let insert_at item at lst =
+  if at < 0 || at > List.length lst then None
+  else
+    let rec aux idx acc = function
+      | [] ->
+          List.rev acc
+      | h :: t ->
+          if idx = at then aux idx (h :: item :: acc) t
+          else aux (idx + 1) (h :: acc) t
+    in
+
+    Some (aux 0 [] lst)
+;;
