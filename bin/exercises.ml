@@ -165,7 +165,7 @@ module Slice_from_to_proper = struct
   ;;
 
   let slice lst i j =
-    (* get list to take from by dropping elements / folding until*)
+    (* get list to take from by dropping elements / folding until *)
     let _, lst_sans_dropped = fold_until (fun _ _ -> []) [] i lst in
     let taken, _ =
       fold_until (fun acc h -> h :: acc) [] (j - i + 1) lst_sans_dropped
@@ -196,7 +196,7 @@ let slice_from_to_naive l i1 i2 =
 ;;
 
 (* recurse over orig list while returning an accumnlator; skip of the the nth
-   element*)
+   element *)
 let remove_nth (l : 'a list) (n : int) : 'a list =
   let rec aux (acc : 'a list) (curr_idx : int) = function
     | [] ->
@@ -225,7 +225,7 @@ let insert_at item at lst =
       | [] ->
           List.rev acc
       | h :: t ->
-          (* item prepended first, then head*)
+          (* item prepended first, then head *)
           if idx = at then aux idx (h :: item :: acc) t
           else aux (idx + 1) (h :: acc) t
     in

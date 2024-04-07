@@ -2,4 +2,5 @@
  (public_name o1)
  (name main)
  (libraries o1 stdio base lwt)
- (modules main exercises teacher_model))
+ (modules main exercises teacher_model)
+)
