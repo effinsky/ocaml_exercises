@@ -232,3 +232,11 @@ let insert_at item at lst =
 
     Some (aux 0 [] lst)
 ;;
+
+let for_loop start end_ =
+  let out = ref [] in
+  for i = start to end_ do
+    out := i :: !out
+  done ;
+  !out
+;;

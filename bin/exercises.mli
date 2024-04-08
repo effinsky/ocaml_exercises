@@ -40,3 +40,5 @@ val remove_nth : 'a list -> int -> 'a list
 val rotate_left : 'a list -> int -> 'a list
 
 val insert_at : 'a -> int -> 'a list -> 'a list option
+
+val for_loop : int -> int -> int list
