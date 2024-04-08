@@ -1,5 +1,5 @@
-profile = ocamlformat
-# profile = janestreet
+# profile = ocamlformat
+profile = janestreet
 # profile = conventional
 # extension-indent = 4
 # function-indent = 4

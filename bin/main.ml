@@ -2,55 +2,52 @@ module Ex = Exercises
 module StringMap = Map.Make (String)
 
 let list_printer (f : 'a -> unit) (lst : 'a list) =
-  List.iter f lst ; print_endline ""
+  List.iter f lst;
+  print_endline ""
 ;;
 
 let pr_int it = Printf.printf "%d " it
-
 let pr_str it = Printf.printf "%s " it
-
 let pr_int_str (count, it) = Printf.printf "%s:%d " it count
 
 let () =
   (* palindrome *)
-  let inp = [0; 1; 2; 3; 2; 1; 0] in
-  Ex.is_palindrome inp |> Printf.printf "is the list a palindrome? %b\n" ;
+  let inp = [ 0; 1; 2; 3; 2; 1; 0 ] in
+  Ex.is_palindrome inp |> Printf.printf "is the list a palindrome? %b\n";
 
   (* flatten *)
   let flattened =
-    Ex.flatten [One "a"; Many [One "b"; Many [One "c"; One "d"]; One "e"]]
+    Ex.flatten [ One "a"; Many [ One "b"; Many [ One "c"; One "d" ]; One "e" ] ]
   in
-  list_printer pr_str flattened ;
+  list_printer pr_str flattened;
 
   (* compress *)
-  let uncompressed = [1; 1; 2; 2; 3; 3; 3; 4; 5; 5] in
+  let uncompressed = [ 1; 1; 2; 2; 3; 3; 3; 4; 5; 5 ] in
   let compressed = Ex.compress uncompressed in
-  list_printer pr_int compressed ;
+  list_printer pr_int compressed;
 
   (* pack *)
-  let unpacked = [1; 1; 2; 2; 3; 4; 4; 4] in
+  let unpacked = [ 1; 1; 2; 2; 3; 4; 4; 4 ] in
   let packed = Ex.pack unpacked in
   list_printer
     (fun sublist ->
-      print_string "new sublist:\n" ;
-      List.iter pr_int sublist )
-    packed ;
+      print_string "new sublist:\n";
+      List.iter pr_int sublist)
+    packed;
 
   (* rlencode *)
-  let list_to_encode = ["a"; "a"; "b"; "b"; "c"; "c"; "c"; "d"; "d"] in
+  let list_to_encode = [ "a"; "a"; "b"; "b"; "c"; "c"; "c"; "d"; "d" ] in
   let encoded = Ex.encode list_to_encode in
-  list_printer pr_int_str encoded ;
+  list_printer pr_int_str encoded;
 
   (* rl_encode modified *)
   let encoded_modified = Ex.rle_modded list_to_encode in
   list_printer
     (fun it ->
       match it with
-      | Ex.Single x ->
-          Printf.printf "%s" x
-      | Ex.Plural (count, it) ->
-          Printf.printf "%s:%d " it count )
-    encoded_modified ;
+      | Ex.Single x -> Printf.printf "%s" x
+      | Ex.Plural (count, it) -> Printf.printf "%s:%d " it count)
+    encoded_modified;
 
   let decoded =
     Ex.run_len_decode
@@ -59,80 +56,80 @@ let () =
       ; Ex.Plural (2, "c")
       ; Ex.Plural (2, "a")
       ; Ex.Single "d"
-      ; Ex.Plural (4, "e") ]
+      ; Ex.Plural (4, "e")
+      ]
   in
-  print_endline "decoded list: " ;
-  list_printer pr_str decoded ;
+  print_endline "decoded list: ";
+  list_printer pr_str decoded;
 
-  let duplicated_items = Ex.duplicate_items [0; 5; 7; 2; -1; 43] in
-  print_endline "duplicated items: " ;
-  list_printer pr_int duplicated_items ;
+  let duplicated_items = Ex.duplicate_items [ 0; 5; 7; 2; -1; 43 ] in
+  print_endline "duplicated items: ";
+  list_printer pr_int duplicated_items;
 
-  let replicated_items = Ex.replicate_items [666; 777; 888] 4 in
-  print_endline "replicated items: " ;
-  list_printer pr_int replicated_items ;
+  let replicated_items = Ex.replicate_items [ 666; 777; 888 ] 4 in
+  print_endline "replicated items: ";
+  list_printer pr_int replicated_items;
 
-  let list_to_remove_nth_from = [1; 2; 3; 4; 5; 6; 7; 8; 9] in
+  let list_to_remove_nth_from = [ 1; 2; 3; 4; 5; 6; 7; 8; 9 ] in
   let removed_nth = Ex.remove_nth list_to_remove_nth_from 3 in
-  print_endline "list with nth items removed: " ;
-  list_printer pr_int removed_nth ;
+  print_endline "list with nth items removed: ";
+  list_printer pr_int removed_nth;
 
-  print_endline "----------------------------------------------" ;
+  print_endline "----------------------------------------------";
 
   (* split list *)
-  let list_to_split = [6; 3; 4; 6; 2; 2; 4; 4; 2] in
-  print_endline "list_to_split" ;
-  list_printer pr_int list_to_split ;
+  let list_to_split = [ 6; 3; 4; 6; 2; 2; 4; 4; 2 ] in
+  print_endline "list_to_split";
+  list_printer pr_int list_to_split;
   let l_1, l_2 = Ex.split_list_at list_to_split 5 in
-  print_endline "split list" ;
-  list_printer pr_int l_1 ;
-  list_printer pr_int l_2 ;
+  print_endline "split list";
+  list_printer pr_int l_1;
+  list_printer pr_int l_2;
 
-  print_endline "----------------------------------------------" ;
+  print_endline "----------------------------------------------";
 
   (* slice from list *)
-  let list_to_slice = [8; 7; 6; 5; 4; 3; 2; 1; 0] in
+  let list_to_slice = [ 8; 7; 6; 5; 4; 3; 2; 1; 0 ] in
   let sliced = Ex.Slice_from_to_proper.slice list_to_slice 3 5 in
-  print_endline "sliced list" ;
-  list_printer pr_int sliced ;
+  print_endline "sliced list";
+  list_printer pr_int sliced;
 
-  print_endline "----------------------------------------------" ;
+  print_endline "----------------------------------------------";
 
   (* remove nth element from list *)
-  let nth_to_remove = ["something"; "nothing"; "everything"; "anything"] in
+  let nth_to_remove = [ "something"; "nothing"; "everything"; "anything" ] in
   let with_2nd_removed = Ex.remove_nth nth_to_remove 2 in
-  list_printer pr_str with_2nd_removed ;
+  list_printer pr_str with_2nd_removed;
 
-  print_endline "----------------------------------------------" ;
+  print_endline "----------------------------------------------";
 
   (* rotate list n positions to the left *)
-  let l_to_rotate = [1; 2; 3; 4; 5; 6] in
+  let l_to_rotate = [ 1; 2; 3; 4; 5; 6 ] in
   let pos = 4 in
   let rotated_left = Ex.rotate_left l_to_rotate pos in
-  Printf.printf "list to rotate by %d\n" pos ;
-  list_printer pr_int l_to_rotate ;
-  print_endline "rotated list" ;
-  list_printer pr_int rotated_left ;
+  Printf.printf "list to rotate by %d\n" pos;
+  list_printer pr_int l_to_rotate;
+  print_endline "rotated list";
+  list_printer pr_int rotated_left;
 
   (* insert an item at a given position into a list *)
-  let l_to_insert_to = ["alpha"; "beta"; "delta"] in
+  let l_to_insert_to = [ "alpha"; "beta"; "delta" ] in
   let pos = 2 in
   let l_inserted = Ex.insert_at "gamma" pos l_to_insert_to in
 
-  print_endline "printing list before insertion" ;
-  list_printer pr_str l_to_insert_to ;
-  Printf.printf "printing list with element inserted at position %d\n" pos ;
+  print_endline "printing list before insertion";
+  list_printer pr_str l_to_insert_to;
+  Printf.printf "printing list with element inserted at position %d\n" pos;
   (* will unwrap option for this case for brevity *)
-  l_inserted |> Option.get |> list_printer pr_str ;
-
-  let rng = Ex.for_loop 10 20 in
-  print_endline "printing range" ;
-  list_printer pr_int rng
+  l_inserted |> Option.get |> list_printer pr_str
 ;;
 
 let append a b =
   (* recursing over b list *)
-  let rec aux out = function [] -> out | h :: t -> aux (h :: out) t in
+  let rec aux out = function
+    | [] -> out
+    | h :: t -> aux (h :: out) t
+  in
 
   aux b (List.rev a)
 ;;
@@ -140,12 +137,12 @@ let append a b =
 module StringSet = Set.Make (String)
 
 let () =
-  let appended = append [0; 1; 2] [3; 4; 5] in
-  list_printer pr_int appended ;
-  let appended = append appended [6; 7; 8] in
-  list_printer pr_int appended ;
-  let appended = append appended [10; 10; 10] in
-  list_printer pr_int appended ;
+  let appended = append [ 0; 1; 2 ] [ 3; 4; 5 ] in
+  list_printer pr_int appended;
+  let appended = append appended [ 6; 7; 8 ] in
+  list_printer pr_int appended;
+  let appended = append appended [ 10; 10; 10 ] in
+  list_printer pr_int appended;
 
   let string_set =
     StringSet.of_list
@@ -153,7 +150,8 @@ let () =
       ; "nothingness"
       ; "somethingness"
       ; "maybehtingness"
-      ; "maybehtingness" ]
+      ; "maybehtingness"
+      ]
   in
   StringSet.iter (fun it -> print_endline it) string_set
 ;;
