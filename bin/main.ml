@@ -4,7 +4,6 @@ module StringMap = Map.Make (String)
 let list_printer (f : 'a -> unit) (lst : 'a list) =
   List.iter f lst;
   print_endline ""
-;;
 
 let pr_int it = Printf.printf "%d " it
 let pr_str it = Printf.printf "%s " it
@@ -51,12 +50,13 @@ let () =
 
   let decoded =
     Ex.run_len_decode
-      [ Ex.Plural (4, "a")
-      ; Ex.Single "b"
-      ; Ex.Plural (2, "c")
-      ; Ex.Plural (2, "a")
-      ; Ex.Single "d"
-      ; Ex.Plural (4, "e")
+      [
+        Ex.Plural (4, "a");
+        Ex.Single "b";
+        Ex.Plural (2, "c");
+        Ex.Plural (2, "a");
+        Ex.Single "d";
+        Ex.Plural (4, "e");
       ]
   in
   print_endline "decoded list: ";
@@ -122,17 +122,12 @@ let () =
   Printf.printf "printing list with element inserted at position %d\n" pos;
   (* will unwrap option for this case for brevity *)
   l_inserted |> Option.get |> list_printer pr_str
-;;
 
 let append a b =
   (* recursing over b list *)
-  let rec aux out = function
-    | [] -> out
-    | h :: t -> aux (h :: out) t
-  in
+  let rec aux out = function [] -> out | h :: t -> aux (h :: out) t in
 
   aux b (List.rev a)
-;;
 
 module StringSet = Set.Make (String)
 
@@ -146,12 +141,12 @@ let () =
 
   let string_set =
     StringSet.of_list
-      [ "everythingness"
-      ; "nothingness"
-      ; "somethingness"
-      ; "maybehtingness"
-      ; "maybehtingness"
+      [
+        "everythingness";
+        "nothingness";
+        "somethingness";
+        "maybehtingness";
+        "maybehtingness";
       ]
   in
   StringSet.iter (fun it -> print_endline it) string_set
-;;

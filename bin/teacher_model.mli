@@ -1,7 +1,4 @@
-type teacher =
-  { name : string
-  ; age : int
-  }
+type teacher = { name : string; age : int }
 
 module OrderedTeacher : sig
   type t = teacher
@@ -19,7 +16,10 @@ module TeacherMap : sig
   val update : key -> ('a option -> 'a option) -> 'a t -> 'a t
   val singleton : key -> 'a -> 'a t
   val remove : key -> 'a t -> 'a t
-  val merge : (key -> 'a option -> 'b option -> 'c option) -> 'a t -> 'b t -> 'c t
+
+  val merge :
+    (key -> 'a option -> 'b option -> 'c option) -> 'a t -> 'b t -> 'c t
+
   val union : (key -> 'a -> 'a -> 'a option) -> 'a t -> 'a t -> 'a t
   val cardinal : 'a t -> int
   val bindings : 'a t -> (key * 'a) list

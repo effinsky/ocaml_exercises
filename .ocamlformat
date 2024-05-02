@@ -1,9 +1,13 @@
 # profile = ocamlformat
-profile = janestreet
+# profile = janestreet
 # profile = conventional
 # extension-indent = 4
 # function-indent = 4
 # let-binding-indent = 4
 # type-decl-indent = 4
-sequence-blank-line = preserve-one
-let-binding-spacing = double-semicolon
+# sequence-blank-line = preserve-one
+# let-binding-spacing = double-semicolon
+version = 0.26.0
+profile = conventional
+break-infix = fit-or-vertical
+parse-docstrings = true
